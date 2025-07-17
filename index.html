@@ -208,34 +208,27 @@
             padding: 20px;
         }
 
-        .player-card input {
-            width: 100%;
+        .player-card {
+            text-align: center;
+        }
+
+        .stat-item {
+            margin: 10px 0;
             padding: 8px;
-            margin: 5px 0;
             background: #333;
-            border: 1px solid #555;
             border-radius: 5px;
-            color: white;
+            border-left: 4px solid #dc143c;
         }
 
-        .add-player-btn {
-            background: #dc143c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0;
+        .stat-label {
+            color: #dc143c;
+            font-weight: bold;
+            margin-right: 10px;
         }
 
-        .delete-btn {
-            background: #b71c1c;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            float: right;
+        .stat-value {
+            color: #ffffff;
+            font-size: 1.2em;
         }
 
         .close-admin {
@@ -296,7 +289,7 @@
     <div class="container">
         <div class="header">
             <div class="logo">PVP LEAGUE</div>
-            <div class="subtitle">Dying Light Competitive League</div>
+            <div class="subtitle">Dying Light 1 PVP League</div>
             <div class="blood-line"></div>
         </div>
 
@@ -304,10 +297,10 @@
             <div class="section">
                 <h2>Requirements</h2>
                 <ul class="requirements">
-                    <li>Must own Dying Light PC ONLY</li>
-                    <li>Minimum 30 hours of gameplay</li>
+                    <li>Must own Dying Light 1 ON PC</li>
+                    <li>Minimum 40 hours of gameplay</li>
                     <li>Active Discord account required</li>
-                    <li>Available for scheduled matches</li>
+                    <li>Available for matches (not forced)</li>
                     <li>Good sportsmanship and attitude</li>
                     <li>No cheating or exploiting</li>
                     <li>Must be 13+ years old</li>
@@ -325,15 +318,15 @@
                     <li>Professional league management</li>
                     <li>Fair play enforcement</li>
                     <li>Skills improvement coaching</li>
-                    <li>A Ton more</li>
+                    <li>Much more</li>
                 </ul>
             </div>
         </div>
 
         <div class="join-section">
-            <h2 style="color: #dc143c; margin-bottom: 20px;">Join the League</h2>
-            <p style="margin-bottom: 30px; font-size: 1.1em;">Contact our League Leader on Discord to join</p>
-            <a href="https://discord.gg/VvwBWBGYcD" class="discord-btn" onclick="openDiscord()">Join Discord</a>
+            <h2 style="color: #dc143c; margin-bottom: 20px;">Ready to Join the Hunt?</h2>
+            <p style="margin-bottom: 30px; font-size: 1.1em;">Contact our League Leader on Discord to begin your journey</p>
+            <a href="#" class="discord-btn" onclick="openDiscord()">Join Discord</a>
         </div>
     </div>
 
@@ -349,7 +342,6 @@
         <button class="close-admin" onclick="closeAdmin()">Close Admin</button>
         <div class="admin-content">
             <h2 style="color: #dc143c; text-align: center; margin-bottom: 30px;">League Player Statistics</h2>
-            <button class="add-player-btn" onclick="addPlayer()">Add New Player</button>
             <div class="player-stats" id="playerStats">
                 <!-- Player cards will be dynamically generated here -->
             </div>
@@ -357,8 +349,25 @@
     </div>
 
     <script>
-        // Player data storage
-        let players = JSON.parse(localStorage.getItem('leaguePlayerData')) || [];
+        // Player data storage - Edit this array to add/remove/modify players
+        let players = [
+            {
+                id: 1,
+                name: 'Envy',
+                rank: 'League Manager',
+                points: 0,
+                kills: 0,
+                matches: 0
+            },
+            {
+                id: 2,
+                name: 'Rawdogger69',
+                rank: 'League Manager',
+                points: 0,
+                kills: 0,
+                matches: 0
+            },
+        ];
 
         function toggleAdmin() {
             const adminAccess = document.getElementById('adminAccess');
@@ -381,41 +390,6 @@
             document.getElementById('adminPassword').value = '';
         }
 
-        function addPlayer() {
-            const newPlayer = {
-                id: Date.now(),
-                name: 'New Player',
-                points: 0,
-                kills: 0,
-                matches: 0
-            };
-            players.push(newPlayer);
-            savePlayerData();
-            renderPlayerStats();
-        }
-
-        function deletePlayer(id) {
-            players = players.filter(player => player.id !== id);
-            savePlayerData();
-            renderPlayerStats();
-        }
-
-        function updatePlayer(id, field, value) {
-            const player = players.find(p => p.id === id);
-            if (player) {
-                if (field === 'name') {
-                    player[field] = value;
-                } else {
-                    player[field] = parseInt(value) || 0;
-                }
-                savePlayerData();
-            }
-        }
-
-        function savePlayerData() {
-            localStorage.setItem('leaguePlayerData', JSON.stringify(players));
-        }
-
         function loadPlayerStats() {
             renderPlayerStats();
         }
@@ -428,16 +402,23 @@
                 const playerCard = document.createElement('div');
                 playerCard.className = 'player-card';
                 playerCard.innerHTML = `
-                    <button class="delete-btn" onclick="deletePlayer(${player.id})">Delete</button>
-                    <h3 style="color: #dc143c; margin-bottom: 15px;">Player Stats</h3>
-                    <input type="text" placeholder="Player Name" value="${player.name}" 
-                           oninput="updatePlayer(${player.id}, 'name', this.value)">
-                    <input type="number" placeholder="Points" value="${player.points}" 
-                           oninput="updatePlayer(${player.id}, 'points', this.value)">
-                    <input type="number" placeholder="Kills" value="${player.kills}" 
-                           oninput="updatePlayer(${player.id}, 'kills', this.value)">
-                    <input type="number" placeholder="Matches Won" value="${player.matches}" 
-                           oninput="updatePlayer(${player.id}, 'matches', this.value)">
+                    <h3 style="color: #dc143c; margin-bottom: 15px;">${player.name}</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Rank:</span>
+                        <span class="stat-value">${player.rank}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Points:</span>
+                        <span class="stat-value">${player.points}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Kills:</span>
+                        <span class="stat-value">${player.kills}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Matches Won:</span>
+                        <span class="stat-value">${player.matches}</span>
+                    </div>
                 `;
                 container.appendChild(playerCard);
             });

@@ -13,7 +13,12 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #2a0a0a 100%);
+            background: 
+                linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 10, 10, 0.8) 50%, rgba(42, 10, 10, 0.8) 100%),
+                url('assets/wallpaper_dying_light_01_1920x1080.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
@@ -63,12 +68,13 @@
         }
 
         .section {
-            background: rgba(20, 20, 20, 0.8);
+            background: rgba(20, 20, 20, 0.9);
             border: 2px solid #dc143c;
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 0 30px rgba(220, 20, 60, 0.2);
             animation: fadeInUp 1s ease-out;
+            backdrop-filter: blur(5px);
         }
 
         .section h2 {
@@ -111,6 +117,7 @@
             padding: 40px;
             margin: 40px 0;
             animation: pulse 2s infinite;
+            backdrop-filter: blur(5px);
         }
 
         .discord-btn {
@@ -140,25 +147,27 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(20, 20, 20, 0.95);
             border: 1px solid #333;
             border-radius: 10px;
             padding: 20px;
             width: 300px;
             display: none;
+            backdrop-filter: blur(10px);
         }
 
         .admin-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #333;
+            background: rgba(51, 51, 51, 0.9);
             color: #dc143c;
             border: 1px solid #dc143c;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
+            backdrop-filter: blur(5px);
         }
 
         .admin-btn:hover {
@@ -170,7 +179,7 @@
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            background: #333;
+            background: rgba(51, 51, 51, 0.9);
             border: 1px solid #dc143c;
             border-radius: 5px;
             color: white;
@@ -178,7 +187,12 @@
 
         .admin-panel {
             display: none;
-            background: rgba(10, 10, 10, 0.95);
+            background: 
+                linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 10, 10, 0.95) 50%, rgba(42, 10, 10, 0.95) 100%),
+                url('assets/wallpaper_dying_light_01_1920x1080.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             position: fixed;
             top: 0;
             left: 0;
@@ -206,6 +220,7 @@
             border: 2px solid #dc143c;
             border-radius: 10px;
             padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .player-card {
@@ -215,7 +230,7 @@
         .stat-item {
             margin: 10px 0;
             padding: 8px;
-            background: #333;
+            background: rgba(51, 51, 51, 0.8);
             border-radius: 5px;
             border-left: 4px solid #dc143c;
         }
@@ -288,8 +303,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">PVP LEAGUE</div>
-            <div class="subtitle">Dying Light 1 PVP League</div>
+            <div class="logo">VW PVP LEAGUE</div>
+            <div class="subtitle">The Volatile Workshop PVP league</div>
             <div class="blood-line"></div>
         </div>
 
@@ -326,7 +341,7 @@
         <div class="join-section">
             <h2 style="color: #dc143c; margin-bottom: 20px;">Ready to Join the Hunt?</h2>
             <p style="margin-bottom: 30px; font-size: 1.1em;">Contact our League Leader on Discord to begin your journey</p>
-            <a href="#" class="discord-btn" onclick="openDiscord()">Join Discord</a>
+            <a href="https://discord.gg/VvwBWBGYcD" class="discord-btn" onclick="openDiscord()">Join Discord</a>
         </div>
     </div>
 

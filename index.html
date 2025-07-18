@@ -143,121 +143,6 @@
             background: linear-gradient(45deg, #ff1744, #dc143c);
         }
 
-        .admin-access {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
-            display: none;
-            backdrop-filter: blur(10px);
-        }
-
-        .admin-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(51, 51, 51, 0.9);
-            color: #dc143c;
-            border: 1px solid #dc143c;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            backdrop-filter: blur(5px);
-        }
-
-        .admin-btn:hover {
-            background: #dc143c;
-            color: white;
-        }
-
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background: rgba(51, 51, 51, 0.9);
-            border: 1px solid #dc143c;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .admin-panel {
-            display: none;
-            background: 
-                linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 10, 10, 0.95) 50%, rgba(42, 10, 10, 0.95) 100%),
-                url('assets/wallpaper_dying_light_01_1920x1080.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .admin-content {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        .player-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .player-card {
-            background: rgba(20, 20, 20, 0.9);
-            border: 2px solid #dc143c;
-            border-radius: 10px;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .player-card {
-            text-align: center;
-        }
-
-        .stat-item {
-            margin: 10px 0;
-            padding: 8px;
-            background: rgba(51, 51, 51, 0.8);
-            border-radius: 5px;
-            border-left: 4px solid #dc143c;
-        }
-
-        .stat-label {
-            color: #dc143c;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .stat-value {
-            color: #ffffff;
-            font-size: 1.2em;
-        }
-
-        .close-admin {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #dc143c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -292,10 +177,6 @@
             
             .logo {
                 font-size: 2.5em;
-            }
-            
-            .admin-access {
-                width: 250px;
             }
         }
     </style>
@@ -345,93 +226,10 @@
         </div>
     </div>
 
-    <button class="admin-btn" onclick="toggleAdmin()">Admin</button>
-
-    <div class="admin-access" id="adminAccess">
-        <h3 style="color: #dc143c; margin-bottom: 15px;">Admin Access</h3>
-        <input type="password" id="adminPassword" placeholder="Enter password">
-        <button class="discord-btn" style="width: 100%; margin-top: 10px;" onclick="checkPassword()">Login</button>
-    </div>
-
-    <div class="admin-panel" id="adminPanel">
-        <button class="close-admin" onclick="closeAdmin()">Close Admin</button>
-        <div class="admin-content">
-            <h2 style="color: #dc143c; text-align: center; margin-bottom: 30px;">League Player Statistics</h2>
-            <div class="player-stats" id="playerStats">
-                <!-- Player cards will be dynamically generated here -->
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Player data storage - Edit this array to add/remove/modify players
-        let players = [
-            {
-
-            },
-        ];
-
-        function toggleAdmin() {
-            const adminAccess = document.getElementById('adminAccess');
-            adminAccess.style.display = adminAccess.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function checkPassword() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === 'ZzppiznAUWCJKkCMoRsM') {
-                document.getElementById('adminAccess').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                loadPlayerStats();
-            } else {
-                alert('Incorrect password!');
-            }
-        }
-
-        function closeAdmin() {
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('adminPassword').value = '';
-        }
-
-        function loadPlayerStats() {
-            renderPlayerStats();
-        }
-
-        function renderPlayerStats() {
-            const container = document.getElementById('playerStats');
-            container.innerHTML = '';
-
-            players.forEach(player => {
-                const playerCard = document.createElement('div');
-                playerCard.className = 'player-card';
-                playerCard.innerHTML = `
-                    <h3 style="color: #dc143c; margin-bottom: 15px;">${player.name}</h3>
-                    <div class="stat-item">
-                        <span class="stat-label">Rank:</span>
-                        <span class="stat-value">${player.rank}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Points:</span>
-                        <span class="stat-value">${player.points}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Kills:</span>
-                        <span class="stat-value">${player.kills}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Matches Won:</span>
-                        <span class="stat-value">${player.matches}</span>
-                    </div>
-                `;
-                container.appendChild(playerCard);
-            });
-        }
-
         function openDiscord() {
             alert('Contact the League Leader on Discord!\n\nPlease join our Discord server and message the League Leader to complete your registration.');
         }
-
-        // Initialize admin access as hidden
-        document.getElementById('adminAccess').style.display = 'none';
     </script>
 </body>
 </html>

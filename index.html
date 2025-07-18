@@ -143,6 +143,96 @@
             background: linear-gradient(45deg, #ff1744, #dc143c);
         }
 
+        .player-stats-section {
+            background: rgba(20, 20, 20, 0.9);
+            border: 2px solid #dc143c;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .player-stats-section h2 {
+            color: #dc143c;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .player-stats-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .player-stats-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .player-stats-container::-webkit-scrollbar-track {
+            background: rgba(51, 51, 51, 0.3);
+            border-radius: 4px;
+        }
+
+        .player-stats-container::-webkit-scrollbar-thumb {
+            background: #dc143c;
+            border-radius: 4px;
+        }
+
+        .player-stats-container::-webkit-scrollbar-thumb:hover {
+            background: #ff1744;
+        }
+
+        .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            background: rgba(51, 51, 51, 0.8);
+            border-radius: 10px;
+            border-left: 4px solid #dc143c;
+            transition: all 0.3s ease;
+        }
+
+        .player-item:hover {
+            background: rgba(51, 51, 51, 0.9);
+            transform: translateX(5px);
+        }
+
+        .player-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffffff;
+            flex: 1;
+        }
+
+        .player-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-group {
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #dc143c;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            color: #ffffff;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -224,12 +314,55 @@
             <p style="margin-bottom: 30px; font-size: 1.1em;">Contact our League Leader on Discord to begin your journey</p>
             <a href="https://discord.gg/VvwBWBGYcD" class="discord-btn" onclick="openDiscord()">Join Discord</a>
         </div>
+
+        <div class="player-stats-section">
+            <h2>Current League Players</h2>
+            <div class="player-stats-container" id="playerStatsContainer">
+                <!-- Player items will be dynamically generated here -->
+            </div>
+        </div>
     </div>
 
     <script>
+        // EDIT THIS ARRAY TO ADD/REMOVE/MODIFY PLAYERS
+        // Simply add new objects or modify existing ones
+        const players = [
+            { name: "Envy", rank: "League Leader", points: 0 },
+            { name: "Rawdogger69", rank: "League Manager", points: 0 },
+            { name: "Void", rank: "Ultimate Survivor - MAX", points: 0 }
+
+        ];
+
+        function loadPlayerStats() {
+            const container = document.getElementById('playerStatsContainer');
+            container.innerHTML = '';
+
+            players.forEach(player => {
+                const playerItem = document.createElement('div');
+                playerItem.className = 'player-item';
+                playerItem.innerHTML = `
+                    <div class="player-name">${player.name}</div>
+                    <div class="player-stats">
+                        <div class="stat-group">
+                            <div class="stat-label">Rank</div>
+                            <div class="stat-value">${player.rank}</div>
+                        </div>
+                        <div class="stat-group">
+                            <div class="stat-label">Points</div>
+                            <div class="stat-value">${player.points}</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(playerItem);
+            });
+        }
+
         function openDiscord() {
             alert('Contact the League Leader on Discord!\n\nPlease join our Discord server and message the League Leader to complete your registration.');
         }
+
+        // Load player stats when page loads
+        document.addEventListener('DOMContentLoaded', loadPlayerStats);
     </script>
 </body>
 </html>
